@@ -3,7 +3,7 @@ export interface SWContextValue {
     changePage: (page: string) => void
 }
 
-export type Luke = {
+export type Hero = {
     name: string,
     gender: string,
     birth_year: string,
@@ -13,4 +13,8 @@ export type Luke = {
     skin_color: string,
     eye_color: string,
     [key: string]: string | number;
+}
+export interface StorageItem {
+    payload: Hero;
+    timestamp: number;
 }

@@ -1,11 +1,12 @@
 import {base_url, period_month} from "../utils/constants.js";
 import {useEffect, useState} from "react";
-import type {Luke} from "../utils/types"
+import type {Hero, StorageItem} from "../utils/types"
 
 const AboutMe = () => {
-    const [hero, setHero] = useState<Luke | null>(null);
+    const [hero, setHero] = useState<Hero | null>(null);
     useEffect(() => {
-            const hero = JSON.parse(localStorage.getItem("hero") as string);
+        const storageValue: string | null = localStorage.getItem("hero");
+        const hero: StorageItem = storageValue ? JSON.parse(storageValue) : null;
 
         if (hero && ((Date.now() - hero.timestamp) < period_month)) {
             setHero(hero.payload);
@@ -13,7 +14,7 @@ const AboutMe = () => {
             fetch(`${base_url}/v1/peoples/1`)
                 .then(response => response.json())
                 .then(data => {
-                    const info: Luke = {
+                    const info: Hero = {
                         name: data.name,
                         gender: data.gender,
                         birth_year: data.birth_year,
@@ -27,7 +28,7 @@ const AboutMe = () => {
                     localStorage.setItem("hero", JSON.stringify({
                         payload: info,
                         timestamp: Date.now()
-                    }));
+                    } as StorageItem));
                 })
         }
     }, [])
@@ -46,3 +47,4 @@ const AboutMe = () => {
 };
 
 export default AboutMe;
+
