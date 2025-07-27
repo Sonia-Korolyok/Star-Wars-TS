@@ -2,9 +2,12 @@
 import {base_url, period_month} from "../utils/constants.ts";
 import {useEffect, useState} from "react";
 import type {HeroInfo} from "../utils/types";
+import {useParams} from "react-router";
 
 const AboutMe = () => {
     const [hero, setHero] = useState<HeroInfo>();
+    const {heroId} = useParams();
+    console.log({heroId});
     useEffect(() => {
         const hero = JSON.parse(localStorage.getItem("hero")!);
         if (hero && ((Date.now() - hero.timestamp) < period_month)) {
