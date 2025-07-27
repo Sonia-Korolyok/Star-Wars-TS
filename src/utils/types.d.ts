@@ -1,20 +1,16 @@
-export interface SWContextValue {
+
+export interface SWContextValue{
     page: string,
     changePage: (page: string) => void
 }
 
-export type Hero = {
+export interface HeroInfo {
     name: string,
     gender: string,
     birth_year: string,
-    height: string,
-    mass: string,
+    height: number,
+    mass: number,
     hair_color: string,
     skin_color: string,
     eye_color: string,
-    [key: string]: string | number;
-}
-export interface StorageItem {
-    payload: Hero;
-    timestamp: number;
 }

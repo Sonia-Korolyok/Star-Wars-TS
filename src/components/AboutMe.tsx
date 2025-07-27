@@ -1,20 +1,19 @@
-import {base_url, period_month} from "../utils/constants.js";
+
+import {base_url, period_month} from "../utils/constants.ts";
 import {useEffect, useState} from "react";
-import type {Hero, StorageItem} from "../utils/types"
+import type {HeroInfo} from "../utils/types";
 
 const AboutMe = () => {
-    const [hero, setHero] = useState<Hero | null>(null);
+    const [hero, setHero] = useState<HeroInfo>();
     useEffect(() => {
-        const storageValue: string | null = localStorage.getItem("hero");
-        const hero: StorageItem = storageValue ? JSON.parse(storageValue) : null;
-
+        const hero = JSON.parse(localStorage.getItem("hero")!);
         if (hero && ((Date.now() - hero.timestamp) < period_month)) {
             setHero(hero.payload);
         } else {
             fetch(`${base_url}/v1/peoples/1`)
                 .then(response => response.json())
                 .then(data => {
-                    const info: Hero = {
+                    const info = {
                         name: data.name,
                         gender: data.gender,
                         birth_year: data.birth_year,
@@ -28,7 +27,7 @@ const AboutMe = () => {
                     localStorage.setItem("hero", JSON.stringify({
                         payload: info,
                         timestamp: Date.now()
-                    } as StorageItem));
+                    }));
                 })
         }
     }, [])
@@ -38,7 +37,7 @@ const AboutMe = () => {
             {(!!hero) &&
                 <div className={'text-[2em] text-justify tracking-widest leading-14 ml-8'}>
                     {Object.keys(hero).map(key => <p key={key}>
-                        <span className={'text-3xl capitalize'}>{key.replace('_', ' ')}</span>: {hero[key]}
+                        <span className={'text-3xl capitalize'}>{key.replace('_', ' ')}</span>: {hero[key as keyof HeroInfo]}
                     </p>)}
                 </div>
             }
@@ -47,4 +46,3 @@ const AboutMe = () => {
 };
 
 export default AboutMe;
-
