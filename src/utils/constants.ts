@@ -30,7 +30,7 @@ export const characters = {
     },
     leia:{
         name: "Leia Organa",
-        img: friend6,
+        img: friend9,
         url: `${base_url+version}/peoples/5`
     },
     obi_wan:{
@@ -50,7 +50,7 @@ export const characters = {
     },
     yoda:{
         name: "Yoda",
-        img: friend9,
+        img: friend6,
         url: `${base_url+version}/peoples/0`
     },
     ewok:{
