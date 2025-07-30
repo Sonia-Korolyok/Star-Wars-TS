@@ -1,4 +1,5 @@
-import friend0 from "../assets/main.jpg"
+
+import friend0 from "../assets/main.jpg";
 import friend1 from "../assets/friend1.jpg";
 import friend2 from "../assets/friend2.jpg";
 import friend3 from "../assets/friend3.jpg";
@@ -8,11 +9,11 @@ import friend6 from "../assets/friend6.jpg";
 import friend7 from "../assets/friend7.jpg";
 import friend8 from "../assets/friend8.jpg";
 import friend9 from "../assets/friend9.jpg";
+import type {Characters} from "./types";
 
-export const base_url = 'http://sw-info-api.herokuapp.com';
+export const base_url = 'https://sw-info-api.herokuapp.com';
 export const version = '/v1';
-
-export const characters = {
+export const characters: Characters = {
     luke: {
         name: "Luke Skywalker",
         img: friend0,
@@ -30,7 +31,7 @@ export const characters = {
     },
     leia:{
         name: "Leia Organa",
-        img: friend9,
+        img: friend6,
         url: `${base_url+version}/peoples/5`
     },
     obi_wan:{
@@ -50,7 +51,7 @@ export const characters = {
     },
     yoda:{
         name: "Yoda",
-        img: friend6,
+        img: friend9,
         url: `${base_url+version}/peoples/0`
     },
     ewok:{
@@ -63,10 +64,10 @@ export const characters = {
         img: friend7,
         url: `${base_url+version}/transports/10`
     }
-}
+};
 
-// export const base_url = 'https://sw-info-api.herokuapp.com';
 export const friends = [friend1, friend2, friend3, friend4, friend5, friend6, friend7, friend8, friend9];
+export const defaultHero = 'luke';
 export const navItems = ['Home', 'About me', 'Star Wars', 'Contact'];
 export const period_month = 30 * 24 * 60 * 60 * 1000;
 export const starWarsInfo = `Star Wars is an American epic space opera media franchise created by George Lucas, which began with the eponymous 1977 film and quickly became a worldwide pop culture phenomenon. The franchise has been expanded into various films and other media, including television series, video games, novels, comic books, theme park attractions, and themed areas, comprising an all-encompassing fictional universe. Star Wars is one of the highest-grossing media franchises of all time.
