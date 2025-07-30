@@ -66,7 +66,7 @@ export const characters: Characters = {
     }
 };
 
-export const friends = [friend1, friend2, friend3, friend4, friend5, friend6, friend7, friend8, friend9];
+export const friends = Object.keys(characters);
 export const defaultHero = 'luke';
 export const navItems = ['Home', 'About me', 'Star Wars', 'Contact'];
 export const period_month = 30 * 24 * 60 * 60 * 1000;
