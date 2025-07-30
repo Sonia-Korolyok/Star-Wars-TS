@@ -12,7 +12,7 @@ const {hero} = useContext(SWContext);
 
     return (
 
-            <NavLink to={`${itemTitle}/${hero}`}><Button>{itemTitle}</Button></NavLink>
+            <NavLink to={`/${itemTitle}/${hero}`}><Button>{itemTitle}</Button></NavLink>
 
 
     )
