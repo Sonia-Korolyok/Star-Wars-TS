@@ -3,15 +3,16 @@ import {useContext, useEffect, useState} from "react";
 import type {HeroInfo} from "../utils/types";
 import {useParams} from "react-router";
 import {SWContext} from "../utils/context.ts";
+import ErrorPage from "./ErrorPage.tsx";
 
 const AboutMe = () => {
     const [hero, setHero] = useState<HeroInfo>();
-    let {heroId = defaultHero} = useParams();
+    const {heroId = defaultHero} = useParams();
     const {changeHero} = useContext(SWContext);
 
     useEffect(() => {
         if(!(heroId in characters)){
-            heroId = defaultHero;
+            return;
         }
         changeHero(heroId);
         const hero = JSON.parse(localStorage.getItem(heroId)!);
@@ -40,7 +41,7 @@ const AboutMe = () => {
         }
     }, [heroId])
 
-    return (
+    return (heroId in characters) ? (
         <>
             {(!!hero) &&
                 <div className={'text-[2em] text-justify tracking-widest leading-14 ml-8'}>
@@ -50,7 +51,7 @@ const AboutMe = () => {
                 </div>
             }
         </>
-    );
+    ) : <ErrorPage/>;
 };
 
 export default AboutMe;
