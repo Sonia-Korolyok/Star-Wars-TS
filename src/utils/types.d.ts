@@ -21,6 +21,7 @@ export interface Hero{
     url: string
 }
 
-export interface Characters {
-    [key: string]: Hero;
-}
+// export interface Characters {
+//     [key: string]: Hero;
+// }
+export type Characters = Record<string, Hero>
