@@ -1,30 +1,39 @@
-import {useEffect, useState} from "react";
-import {base_url, period_month} from "../utils/constants.js";
+import {useContext, useEffect, useState} from "react";
+import {base_url, characters, defaultHero, period_month} from "../utils/constants.js";
+import {useParams} from "react-router";
+import {SWContext} from "../utils/context.ts";
+import ErrorPage from "./ErrorPage.tsx";
 
 const Contact = () => {
     const [planets, setPlanets] = useState(['wait...']);
+    const {heroId = defaultHero} = useParams();
+    const {changeHero} = useContext(SWContext);
 
     async function getPlanets() {
         const res = await fetch(`${base_url}/v1/planets`);
         const data: Array<{name: string}> = await res.json();
-        const planets = data.map(item => item.name);
-        setPlanets(planets);
+        const planetsTemp = data.map(item => item.name);
+        setPlanets(planetsTemp);
         localStorage.setItem('planets', JSON.stringify({
-            payload: planets,
+            payload: planetsTemp,
             time: Date.now()
         }));
     }
 
     useEffect(() => {
-        const planets = JSON.parse(localStorage.getItem('planets')!);
-        if (planets && ((Date.now() - planets.time) < period_month)) {
-            setPlanets(planets.payload);
+        if(!(heroId in characters)){
+            return;
+        }
+        changeHero(heroId);
+        const planetsTemp2 = JSON.parse(localStorage.getItem('planets')!);
+        if (planetsTemp2 && ((Date.now() - planetsTemp2.time) < period_month)) {
+            setPlanets(planetsTemp2.payload);
         } else {
             getPlanets().then(() => console.log('Planets were loaded'));
         }
-    }, [])
+    }, [heroId])
 
-    return (
+    return (heroId in characters) ? (
         <form className={`w-4/5 my-0 mx-auto rounded-[5px] bg-[#f2f2f2] p-5`} onSubmit={(e) => {
             e.preventDefault();
         }}>
@@ -52,7 +61,7 @@ const Contact = () => {
                 type="submit">Submit
             </button>
         </form>
-    )
+    ) : <ErrorPage/>
 };
 
 export default Contact;
