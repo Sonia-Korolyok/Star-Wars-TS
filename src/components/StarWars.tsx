@@ -1,13 +1,14 @@
-import {starWarsInfo} from "../utils/constants.js";
-import Text from "./ui/Text.jsx";
-import ErrorPage from "./ErrorPage.tsx";
+
+import {starWarsInfo} from "../utils/constants.ts";
+import Text from "./ui/Text.tsx";
 import {useErrorPage} from "../hooks/useErrorPage.tsx";
+import ErrorPage from "./ErrorPage.tsx";
 
 const StarWars = () => {
-    const {isError} = useErrorPage()
-    return !isError ? (
+    const {isError} = useErrorPage();
+    return isError ? <ErrorPage/> : (
         <Text>{starWarsInfo}</Text>
-    ) : <ErrorPage/>
-    };
+    );
+};
 
 export default StarWars;
