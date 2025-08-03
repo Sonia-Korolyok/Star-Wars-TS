@@ -8,30 +8,35 @@ const AboutMe = () => {
     const [hero, setHero] = useState<HeroInfo>();
     const {isError, heroId} = useErrorPage();
     useEffect(() => {
-        const heroTemp = JSON.parse(localStorage.getItem(heroId)!);
-        if (heroTemp && ((Date.now() - heroTemp.timestamp) < period_month)) {
-            setHero(heroTemp.payload);
-        } else {
-            fetch(characters[heroId].url)
-                .then(response => response.json())
-                .then(data => {
-                    const info = {
-                        name: data.name,
-                        gender: data.gender,
-                        birth_year: data.birth_year,
-                        height: data.height,
-                        mass: data.mass,
-                        hair_color: data.hair_color,
-                        skin_color: data.skin_color,
-                        eye_color: data.eye_color
-                    }
-                    setHero(info);
-                    localStorage.setItem(heroId, JSON.stringify({
-                        payload: info,
-                        timestamp: Date.now()
-                    }));
-                })
+        if(!isError) {
+            const heroTemp = JSON.parse(localStorage.getItem(heroId)!);
+            if (heroTemp && ((Date.now() - heroTemp.timestamp) < period_month)) {
+                console.log(heroId);
+                setHero(heroTemp.payload);
+            } else {
+                console.log(heroId);
+                fetch(characters[heroId].url)
+                    .then(response => response.json())
+                    .then(data => {
+                        const info = {
+                            name: data.name,
+                            gender: data.gender,
+                            birth_year: data.birth_year,
+                            height: data.height,
+                            mass: data.mass,
+                            hair_color: data.hair_color,
+                            skin_color: data.skin_color,
+                            eye_color: data.eye_color
+                        }
+                        setHero(info);
+                        localStorage.setItem(heroId, JSON.stringify({
+                            payload: info,
+                            timestamp: Date.now()
+                        }));
+                    })
+            }
         }
+
     }, [heroId])
 
     return !isError ? (
