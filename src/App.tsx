@@ -7,12 +7,12 @@ import {defaultHero} from "./utils/constants.js";
 import {SWContext} from "./utils/context.js";
 
 function App() {
-    const [hero, setHero] = useState(defaultHero);
-    const [realHero, setRealHero] = useState(defaultHero);
+    const [hero, setHero] = useState<string|undefined>(defaultHero);
+    // const [realHero, setRealHero] = useState(defaultHero);
 
     return (
         <div>
-            <SWContext value={{hero, changeHero: setHero, realHero, changeRealHero: setRealHero}}>
+            <SWContext value={{hero, changeHero: setHero}}>
                 <Header/>
                 <Main/>
                 <Footer/>

@@ -67,7 +67,7 @@ export const characters: Characters = {
 };
 
 export const friends = Object.keys(characters);
-export const defaultHero = 'luke';
+export const defaultHero = friends[0];
 export const navItems = ['Home', 'About me', 'Star Wars', 'Contact'];
 export const period_month = 30 * 24 * 60 * 60 * 1000;
 export const starWarsInfo = `Star Wars is an American epic space opera media franchise created by George Lucas, which began with the eponymous 1977 film and quickly became a worldwide pop culture phenomenon. The franchise has been expanded into various films and other media, including television series, video games, novels, comic books, theme park attractions, and themed areas, comprising an all-encompassing fictional universe. Star Wars is one of the highest-grossing media franchises of all time.

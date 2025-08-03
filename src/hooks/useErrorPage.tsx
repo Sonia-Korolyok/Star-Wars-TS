@@ -5,15 +5,17 @@ import {SWContext} from "../utils/context.ts";
 
 export const useErrorPage = () => {
     const {heroId = defaultHero} = useParams();
-    const {changeHero, changeRealHero} = useContext(SWContext);
+    const {changeHero} = useContext(SWContext);
 
     useEffect(() => {
-        changeRealHero(heroId);
+        // changeRealHero(heroId);
         if(!(heroId in characters)){
+            changeHero()
             return;
+        }else {
+            changeHero(heroId);
         }
 
-        changeHero(heroId);
     }, [heroId]);
 
     return{

@@ -1,9 +1,9 @@
 
 export interface SWContextValue{
-    hero: string,
-    changeHero: (hero: string) => void,
-    realHero: string,
-    changeRealHero: (hero: string) => void,
+    hero?: string,
+    changeHero: (hero?: string) => void,
+    // realHero: string,
+    // changeRealHero: (hero: string) => void,
 }
 
 export interface HeroInfo {
