@@ -11,10 +11,8 @@ const AboutMe = () => {
         if(!isError) {
             const heroTemp = JSON.parse(localStorage.getItem(heroId)!);
             if (heroTemp && ((Date.now() - heroTemp.timestamp) < period_month)) {
-                console.log(heroId);
                 setHero(heroTemp.payload);
             } else {
-                console.log(heroId);
                 fetch(characters[heroId].url)
                     .then(response => response.json())
                     .then(data => {
